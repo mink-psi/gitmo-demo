@@ -1,0 +1,21 @@
+name: Workflow
+
+on:
+  workflow_call:
+    inputs:
+      message:
+        type: string
+    secrets:
+      CHATBOT_WEBHOOK_URL:
+        required: true
+
+env:
+  environment: ''
+
+jobs:
+  general:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Send message to Chatbot webhook
+      run: |
+        curl -H 'Content-Type: application/json' -d '{"text":"${{inputs.message}}"}' '${{secrets.CHATBOT_WEBHOOK_URL}}'

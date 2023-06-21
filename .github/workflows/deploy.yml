@@ -1,0 +1,16 @@
+name: Automated Deployment
+
+on:
+  pull_request_target:
+    branches:
+      - server/*
+    types:
+      - closed
+
+jobs:
+  publish:
+    uses: mink-psi/gitmo-demo/.github/workflows/workflow.yml@main
+    with:
+      message: Deployed!
+    secrets:
+      CHATBOT_WEBHOOK_URL: ${{ secrets.CHATBOT_WEBHOOK_URL }}
